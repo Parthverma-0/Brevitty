@@ -32,7 +32,7 @@ const PROBLEMS = [
 ]
 
 const STEPS = [
-  { n: 1, title: 'Pick a tool', body: 'Choose from nine advisors built for each stage of the journey.' },
+  { n: 1, title: 'Pick a tool', body: 'Choose from advisors built for each stage of the journey.' },
   { n: 2, title: 'Add your details', body: 'Paste your idea, audience, or rough notes. The more specific, the sharper the answer.' },
   { n: 3, title: 'Get an investor-grade result', body: 'Clear, structured guidance you can act on — or a file you can build from.' },
 ]
@@ -102,7 +102,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-black/55 sm:text-lg"
         >
-          Nine AI tools that take a student founder from a blank page to a
+          AI tools that take a student founder from a blank page to a
           fundable startup.
         </motion.p>
 

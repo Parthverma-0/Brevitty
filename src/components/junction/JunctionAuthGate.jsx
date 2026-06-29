@@ -95,19 +95,6 @@ export default function JunctionAuthGate({ onAuthed }) {
           Sign in
           <span>→</span>
         </motion.button>
-
-        {/* demo credentials hint */}
-        <div className="mt-6 rounded-xl border border-dashed border-black/15 bg-black/[0.02] px-4 py-3">
-          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-black/40">
-            Demo access
-          </p>
-          <p className="mt-1.5 font-mono text-xs text-black/60">
-            test@gmail.com · test@1234
-          </p>
-          <p className="mt-1 text-[11px] leading-relaxed text-black/40">
-            Non-secure demo gate — for showing the flow only.
-          </p>
-        </div>
       </motion.form>
     </section>
   )

@@ -99,6 +99,9 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white/60 px-7 py-3.5 text-sm font-semibold text-ink backdrop-blur-sm transition-colors hover:border-black/30 hover:bg-white"
           >
             Startup Junction 2026
+            <span className="transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
           </MotionLink>
         </motion.div>
 
