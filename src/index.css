@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-orange: #f97316;
+  --color-orange-soft: #fb923c;
+  --color-ink: #0a0a0a;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Subtle film-grain texture overlay */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Slow drifting orbs */
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(4%, -6%) scale(1.08); }
+  66%  { transform: translate(-5%, 4%) scale(0.96); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  will-change: transform;
+}
+
+/* Infinite logo marquee — two rows, opposite directions */
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.animate-marquee-left {
+  animation: marquee-left 38s linear infinite;
+}
+.animate-marquee-right {
+  animation: marquee-right 38s linear infinite;
+}
+.marquee-track:hover .animate-marquee-left,
+.marquee-track:hover .animate-marquee-right {
+  animation-play-state: paused;
+}
+
+/* React Bits — StarBorder travelling glints */
+@keyframes star-movement-bottom {
+  0%   { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(-100%, 0); opacity: 0; }
+}
+@keyframes star-movement-top {
+  0%   { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(100%, 0); opacity: 0; }
+}
+.animate-star-bottom {
+  animation: star-movement-bottom linear infinite alternate;
+}
+.animate-star-top {
+  animation: star-movement-top linear infinite alternate;
+}
+
+/* Section-scoped noise/grain (used on the dark Mentors stage) */
+.noise-bg {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Chrome / rainbow shimmer sweep for cards */
+@keyframes chrome-shimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Corkboard / linen surface for the testimonials wall */
+.corkboard {
+  background-color: #f1e9d9;
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(150,110,60,0.10) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 68% 58%, rgba(150,110,60,0.08) 0 1.5px, transparent 2px),
+    radial-gradient(circle at 42% 82%, rgba(150,110,60,0.09) 0 1px, transparent 2px),
+    radial-gradient(circle at 88% 20%, rgba(150,110,60,0.07) 0 1.5px, transparent 2px);
+  background-size: 90px 90px, 130px 130px, 70px 70px, 110px 110px;
+}
+
+/* Ragged top + bottom edge for torn-paper snippets */
+.torn-edge {
+  clip-path: polygon(
+    0% 7%, 9% 0%, 21% 6%, 34% 1%, 48% 7%, 61% 1%, 74% 6%, 87% 0%, 100% 8%,
+    99% 93%, 88% 100%, 74% 94%, 61% 100%, 47% 95%, 32% 100%, 18% 95%, 7% 100%, 1% 92%
+  );
+}
