@@ -14,14 +14,12 @@ import ToolDetailView from '../components/junction/ToolDetailView.jsx'
 const ease = [0.22, 1, 0.36, 1]
 
 const STAGES = [
-  'Find a problem',
-  'Test demand',
-  'Map rivals',
+  'Validate the idea',
+  'Map competitors',
   'Reach the first 10',
-  'Build the MVP',
-  'Sharpen the deck',
+  'Scope the MVP',
+  'Build the deck',
   'Model the numbers',
-  'Get investor-ready',
 ]
 
 const PROBLEMS = [
@@ -34,7 +32,7 @@ const PROBLEMS = [
 const STEPS = [
   { n: 1, title: 'Pick a tool', body: 'Choose from advisors built for each stage of the journey.' },
   { n: 2, title: 'Add your details', body: 'Paste your idea, audience, or rough notes. The more specific, the sharper the answer.' },
-  { n: 3, title: 'Get an investor-grade result', body: 'Clear, structured guidance you can act on — or a file you can build from.' },
+  { n: 3, title: 'Get an investor-grade result', body: 'Structured guidance from a real Startup Junction skill — ready to act on.' },
 ]
 
 /* ---------------- Hero ---------------- */
@@ -253,11 +251,11 @@ function Toolkit({ onSelect }) {
             The toolkit
           </p>
           <h2 className="mt-4 font-display text-4xl font-bold leading-[1.1] tracking-tight text-ink sm:text-5xl">
-            Nine advisors. One founder’s journey.
+            Six advisors. One founder’s journey.
           </h2>
           <p className="mt-4 text-base text-black/55">
-            Each tool is a focused AI advisor. Some give you an instant answer,
-            others generate a file you can build from.
+            Each tool runs a real Startup Junction skill — tuned for student
+            founders, one form in, structured guidance out.
           </p>
         </div>
 

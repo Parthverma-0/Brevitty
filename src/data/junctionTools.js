@@ -1,151 +1,120 @@
 // Client-safe tool metadata for Startup Junction 2026.
-// NOTE: system prompts, model config, and the API key live ONLY server-side
-// (api/_lib/prompts.js + api/generate.js). Nothing here ships secrets.
+// Each tool maps to a real skill in Skills/*.skill (loaded server-side from
+// api/_lib/skills/<id>.md via api/_lib/prompts.js).
 //
 // `kind` drives the tag chip: 'advisory' => "instant answer",
-// 'builder' => "generates a file".
+// 'builder' => "generates a deliverable".
 
 export const TOOLS = [
   {
-    id: 'problem-identifier',
-    num: '01',
-    name: 'Problem Identifier',
-    tagline: 'Find a problem worth solving.',
-    kind: 'advisory',
-    chips: ['Who you want to help', 'A space you care about', 'Frustrations you’ve noticed', 'Your unfair insight'],
-    tips: [
-      'Start from people, not products.',
-      'Describe a moment something broke for someone.',
-      'Niche beats broad — narrow the audience hard.',
-    ],
-    example:
-      'I’m a final-year design student in Jaipur. I keep noticing that small local boutiques struggle to photograph their products for Instagram — they can’t afford a studio and their phone shots look flat, so their online sales stay low.',
-  },
-  {
-    id: 'idea-evaluator',
-    num: '02',
-    name: 'Idea Evaluator',
-    tagline: 'Pressure-test your idea in minutes.',
-    kind: 'advisory',
-    chips: ['The idea in one line', 'Who it’s for', 'How it makes money', 'Why now'],
-    tips: [
-      'Be honest about the weakest part — that’s what we’ll stress.',
-      'One clear sentence beats a paragraph of buzzwords.',
-      'Say what already exists and why yours is different.',
-    ],
-    example:
-      'An app that lets college students in India split and track shared expenses for trips and flats, then settle up via UPI. Free to use, we take a tiny fee on instant settlements. Why now: UPI is everywhere and Gen-Z hates awkward money chats.',
-  },
-  {
     id: 'idea-validator',
-    num: '03',
+    skillId: 'idea-validation-new',
+    num: '01',
     name: 'Idea Validator',
-    tagline: 'Plan how to prove demand — fast and cheap.',
+    tagline: 'Painkiller or vitamin? Find out before you build.',
     kind: 'advisory',
-    chips: ['Your core assumption', 'Who the user is', 'How you’d reach 10 of them', 'What “yes” looks like'],
+    chips: ['Your idea in one line', 'Target customer (be specific)', 'Their current workaround', 'Where you’d find 10 of them'],
     tips: [
-      'Validate demand before you build anything.',
-      'Talking to 10 real users beats a perfect plan.',
-      'Decide your kill criteria up front.',
+      'Name one person in one situation — not “small businesses”.',
+      'Describe past behaviour, not hypothetical frustration.',
+      'Compliments aren’t validation — pre-orders and workarounds are.',
     ],
     example:
-      'I believe busy parents would pay ₹299/month for healthy, ready-to-cook kids’ meal kits delivered weekly. I can reach parents through my mom’s WhatsApp groups and a couple of local schools.',
+      'Idea: weekly healthy meal kits for busy parents in Jaipur. Customer: working parents with kids under 10 who currently order Swiggy 4–5 nights/week or skip dinner prep entirely. I can reach them through my mom’s school WhatsApp groups and two apartment society groups.',
   },
   {
     id: 'competitor-analysis',
-    num: '04',
+    skillId: 'competitor-analysis-new',
+    num: '02',
     name: 'Competitor Analysis',
-    tagline: 'See the field before you enter it.',
+    tagline: 'Your real rival is what customers do today.',
     kind: 'advisory',
-    chips: ['What you’re building', 'Who it’s for', 'Alternatives people use today', 'Your hunch on the gap'],
+    chips: ['What you’re building', 'Who it’s for', 'What they do today', 'Your hunch on the gap'],
     tips: [
-      'Your real competitor is often “do nothing” or a spreadsheet.',
-      'Look for the gap nobody serves well.',
-      'Find the one angle you can own.',
+      '“We have no competition” is almost always wrong — name the workaround.',
+      'Spreadsheets, interns, and “do nothing” count as competitors.',
+      'One defensible wedge beats a list of vague differentiators.',
     ],
     example:
-      'A booking platform for amateur sports grounds (turf cricket, badminton courts) in tier-2 cities. Right now people book by calling the owner or messaging on Instagram. I think discovery and instant booking is the gap.',
+      'A booking platform for amateur sports grounds (turf cricket, badminton) in tier-2 cities. Customers: weekend players and college teams. Today they book by calling the owner or DMing on Instagram — discovery and instant confirmation is the gap.',
   },
   {
     id: 'gtm-generator',
-    num: '05',
+    skillId: 'gtm-generator-new',
+    num: '03',
     name: 'GTM Generator',
-    tagline: 'A go-to-market plan you can actually run.',
-    kind: 'builder',
-    chips: ['Product + value prop', 'Target audience', 'Budget (even ₹0)', 'Channels you already have'],
+    tagline: 'The fastest path to your first 10 customers.',
+    kind: 'advisory',
+    chips: ['Product + value prop', 'Target customer (ICP)', 'Stage you’re at', 'Revenue model'],
     tips: [
-      'Pick one beachhead audience to win first.',
-      'Free channels you already have beat paid ones you don’t.',
-      'Plan the first 30 days, not the first year.',
+      'Manually find 10 people who already need this — don’t automate first.',
+      'Name specific communities, not “social media”.',
+      'Charge something (even ₹1) — free users give fake feedback.',
     ],
     example:
-      'A Notion-based study planner for NEET aspirants, ₹499 one-time. Audience: Class 11–12 science students. Budget ₹2,000. I have an Instagram page with 1,800 followers and a small Telegram group.',
+      'Notion-based NEET study planner, ₹499 one-time. ICP: Class 11–12 science students preparing for NEET who currently use random PDFs and YouTube. Stage: no product yet, 400 Instagram followers. Revenue: one-time purchase.',
   },
   {
     id: 'mvp-blueprint',
-    num: '06',
+    skillId: 'idea-implementation-new',
+    num: '04',
     name: 'MVP Blueprint',
-    tagline: 'Scope the smallest thing worth building.',
-    kind: 'builder',
-    chips: ['The core value', 'The main user action', 'Tools/skills you have', 'Your deadline'],
-    tips: [
-      'Build the one feature that proves the value.',
-      'No-code is a feature, not a cop-out.',
-      'List what you’re NOT building yet.',
-    ],
-    example:
-      'A platform matching college volunteers with NGOs near campus. Core value: a student finds and applies to a verified local opportunity in under 2 minutes. I know Figma and a bit of React; I want a working demo in 3 weeks.',
-  },
-  {
-    id: 'deck-review',
-    num: '07',
-    name: 'Deck Review',
-    tagline: 'Investor-grade feedback on your pitch.',
+    tagline: 'Build the smallest thing that tests your riskiest assumption.',
     kind: 'advisory',
-    chips: ['Problem & solution', 'Market size', 'Traction so far', 'Team & the ask'],
+    chips: ['Your idea + core assumption', 'Technical ability', 'Budget (even ₹0)', '2-week deadline'],
     tips: [
-      'Paste your real slide text — even rough notes.',
-      'Lead with the problem, not the product.',
-      'Traction, however small, changes everything.',
+      'Cut until only the assumption-testing core remains.',
+      'If a human can do it behind the scenes, fake it (Wizard of Oz).',
+      'If it can’t ship in 14 days, cut scope — don’t extend the timeline.',
     ],
     example:
-      'Problem: tier-2 students can’t find affordable IELTS coaching. Solution: an AI speaking-practice app. Market: 2M test-takers/yr in India. Traction: 400 waitlist signups, 30 paying beta users. Team: 2 founders, ex-edtech. Ask: ₹40L for 18 months.',
+      'Campus volunteer–NGO matching platform. Core assumption: students will apply if they can find a verified opportunity in under 2 minutes. I know Figma and basic React. Budget ~₹5,000 for hosting. Need a testable MVP in 2 weeks.',
   },
   {
     id: 'deck-builder',
-    num: '08',
+    skillId: 'deck-builder-new',
+    num: '05',
     name: 'Deck Builder',
-    tagline: 'Draft a full pitch deck, slide by slide.',
+    tagline: 'A full investor pitch deck, slide by slide.',
     kind: 'builder',
-    chips: ['Problem & solution', 'Who pays & how much', 'Any traction', 'Team & the ask'],
+    chips: ['Problem & solution', 'Market & business model', 'Traction (any size)', 'Team & the ask'],
     tips: [
-      'Give me the raw facts — I’ll structure the slides.',
-      'Honest small numbers beat invented big ones.',
-      'Name what makes your team the right one.',
+      'Give raw facts — honest small numbers beat invented big ones.',
+      'Lead with the problem and why now, not the product tour.',
+      'Paste notes from your other toolkit results if you have them.',
     ],
     example:
-      'We’re building Re-Loop, a campus marketplace for reselling textbooks and hostel gear. Students currently lose money to random WhatsApp groups. We take a 5% fee. 1 campus live, ₹60k GMV in 2 months. Team: 3 final-year students. Raising ₹25L to expand to 10 campuses.',
+      'Re-Loop — campus marketplace for reselling textbooks and hostel gear. Problem: students lose money on random WhatsApp groups. Solution: verified listings + in-app chat. Model: 5% fee. Traction: 1 campus, ₹60k GMV in 2 months. Team: 3 final-year students. Ask: ₹25L to expand to 10 campuses.',
   },
   {
     id: 'financial-model-builder',
-    num: '09',
+    skillId: 'financial-model-new',
+    num: '06',
     name: 'Financial Model Builder',
-    tagline: 'Numbers that make investors lean in.',
+    tagline: 'Investor-grade projections you can defend live.',
     kind: 'builder',
-    chips: ['Pricing & model', 'Rough cost of one sale', 'Growth expectation', 'Fixed monthly costs'],
+    chips: ['Pricing & revenue model', 'Cost to acquire one customer', 'Growth rate (monthly)', 'Fixed monthly costs'],
     tips: [
-      'Estimates are fine — just state your assumptions.',
-      'Unit economics matter more than big totals.',
-      'Know the one number your model hinges on.',
+      'Estimates are fine — label every assumption clearly.',
+      'Unit economics matter more than a giant TAM slide.',
+      'Name the one number the whole model hinges on.',
     ],
     example:
-      'SaaS for small gyms in India. ₹1,500/month per gym. It costs ~₹2,000 in ads to sign one. I think I can add 15 gyms/month. Fixed costs ~₹50,000/month (hosting + one part-time dev). I want a 12-month projection and break-even point.',
+      'SaaS for small gyms in India — ₹1,500/month per gym. CAC ~₹2,000 via Meta ads. Target: 15 new gyms/month. Fixed costs ~₹50,000/month (hosting + part-time dev). Raising ₹40L. Want 12-month projections, break-even, and headline valuation numbers.',
   },
 ]
 
 export const TAG_LABEL = {
   advisory: 'instant answer',
-  builder: 'generates a file',
+  builder: 'generates a deliverable',
 }
+
+export const SKILL_TOOL_IDS = TOOLS.filter((t) => t.skillId).map((t) => t.id)
+
+export const BUILDER_TOOL_IDS = new Set(
+  TOOLS.filter((t) => t.kind === 'builder').map((t) => t.id)
+)
+
+export const TOOL_IDS = TOOLS.map((t) => t.id)
 
 export const getTool = (id) => TOOLS.find((t) => t.id === id)

@@ -8,11 +8,12 @@
 // ephemeral, so counters reset on cold starts) — replace with a durable store
 // (e.g. Upstash/Redis) before any real launch.
 
-import { TOOL_PROMPTS } from './_lib/prompts.js'
+import { TOOL_PROMPTS, BUILDER_TOOL_IDS } from './_lib/prompts.js'
 
 const MODEL = 'gemini-2.5-flash'
 const MAX_INPUT_CHARS = 4000
-const MAX_OUTPUT_TOKENS = 1500
+const MAX_OUTPUT_TOKENS_ADVISORY = 4096
+const MAX_OUTPUT_TOKENS_BUILDER = 8192
 const TEMPERATURE = 0.7
 
 // --- light per-IP rate limit: 6 requests / 60s, in-memory ---
@@ -97,7 +98,9 @@ export default async function handler(req, res) {
         systemInstruction: { parts: [{ text: systemPrompt }] },
         contents: [{ role: 'user', parts: [{ text }] }],
         generationConfig: {
-          maxOutputTokens: MAX_OUTPUT_TOKENS,
+          maxOutputTokens: BUILDER_TOOL_IDS.has(toolId)
+            ? MAX_OUTPUT_TOKENS_BUILDER
+            : MAX_OUTPUT_TOKENS_ADVISORY,
           temperature: TEMPERATURE,
         },
       }),
